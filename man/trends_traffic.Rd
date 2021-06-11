@@ -10,6 +10,4 @@ trends_traffic(test)
 }
 \examples{
 hello()
-\param{
-  name 파일명
 }
