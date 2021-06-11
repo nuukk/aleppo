@@ -1,6 +1,6 @@
 googletrendscrawling <- function(x,y,date)
 {
-  if(missing(date)) date <- paste0("2004-01-01 ",ceiling_date(as.Date(gsub(month(Sys.Date()),month(Sys.Date())-1,Sys.Date())),unit='months')-1)
+  if(missing(date)) date <- paste0("2004-01-01 ",lubridate::ceiling_date(as.Date(gsub(month(Sys.Date()),month(Sys.Date())-1,Sys.Date())),unit='months')-1)
   temp <- tryCatch(gtrends(keyword=x,
                            geo=y,
                            time=date,
