@@ -57,7 +57,7 @@ trends_traffic <- function(name,dbname)
   trends <- full_join(gen0,brn0)
   trends[,`:=`(date=as.Date(date),country=toupper(country),product_type=toupper(product_type),G_trends=as.numeric(G_trends),B_trends=as.numeric(B_trends))]
 
-  traffic <- data.table(read_excel(normalizePath(enc2native(choose.files()))))
+  traffic <- data.table(read_excel(normalizePath(enc2native(choose.files(caption="트래픽 파일을 선택하세요")))))
   traffic[,`:=`(month=as.Date(month),country=toupper(country),product=toupper(product))]
   setkey(traffic,country,month,product)
 
