@@ -3,7 +3,7 @@ trends_traffic <- function(name,dbname)
   name <- deparse(substitute(name))
   if(missing(dbname)) dbname <- name
 
-  keyword_info <- readxl::read_excel(normalizePath(enc2native(choose.files(caption='Select Keyword Data File'))),range='B4:E1000')
+  keyword_info <- readxl::read_excel(normalizePath(enc2native(choose.files(caption='키워드 기준 파일을 선택하세요'))),range='B4:E1000')
   keyword_info <- data.table(keyword_info[complete.cases(keyword_info),])
   keyword_info$국가[keyword_info$국가=='UK'] <- 'GB'
 
