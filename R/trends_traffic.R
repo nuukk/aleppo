@@ -33,7 +33,7 @@ trends_traffic <- function(name,dbname)
     }
   stopCluster(cl)
   sec_gen[,country:=code[trimws(gsub("\\(|\\)","",country),'left')]]
-  sec_gen <- sec_gen[,.(date=as.Date(paste0(V1,"-01")),country,kw_G,G_trends=as.character(V2))]
+  sec_gen <- sec_gen[,.(date=as.Date(paste0(V1,"-01")),country,kw_G,G_trends=as.numeric(V2))]
   sec_gen[,product_type:=as.character(map2(sec_gen$country,sec_gen$kw_G,function(x,y) {keyword_info$제품군[keyword_info$국가==x & keyword_info$General==y]}))]
   gen0 <- filter(bind_rows(gen0,sec_gen),year(date)>=2004)
 
@@ -48,7 +48,7 @@ trends_traffic <- function(name,dbname)
     }
   stopCluster(cl)
   sec_brn[,country:=code[trimws(gsub("\\(|\\)","",country),'left')]]
-  sec_brn <- sec_brn[,.(date=as.Date(paste0(V1,"-01")),country,kw_B,B_trends=as.character(V2))]
+  sec_brn <- sec_brn[,.(date=as.Date(paste0(V1,"-01")),country,kw_B,B_trends=as.numeric(V2))]
   sec_brn[,product_type:=as.character(map2(sec_brn$country,sec_brn$kw_B,function(x,y) {keyword_info$제품군[keyword_info$국가==x & keyword_info$General==y]}))]
   brn0 <- filter(bind_rows(brn0,sec_brn),year(date)>=2004)
 
