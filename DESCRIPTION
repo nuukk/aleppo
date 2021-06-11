@@ -19,7 +19,8 @@ Imports:
     readxl,
     writexl,
     RMySQL,
-    purrr
+    purrr,
+    gtrendsR
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
