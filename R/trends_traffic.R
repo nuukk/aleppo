@@ -38,7 +38,7 @@ trends_traffic <- function(name,dbname)
     sec_gen[,product_type:=as.character(map2(sec_gen$country,sec_gen$kw_G,function(x,y) {keyword_info$제품군[keyword_info$국가==x & keyword_info$General==y]}))]
     gen0 <- bind_rows(gen0,sec_gen)
   }
-  gen0 <- filter(gen0,year(date)>=2004)
+  gen0 <- filter(gen0,year(date)>=2015)
 
     if(askYesNo('추가 Brand Raw 파일을 추가하실래요?')=='TRUE') {
     sec_brn_filelist <- normalizePath(enc2native(choose.files(caption='추가 Brand RAW를 선택하세요')))
@@ -56,7 +56,7 @@ trends_traffic <- function(name,dbname)
     sec_brn[,product_type:=as.character(map2(sec_brn$country,sec_brn$kw_B,function(x,y) {keyword_info$제품군[keyword_info$국가==x & keyword_info$General==y]}))]
     brn0 <- bind_rows(brn0,sec_brn)
   }
-  brn0 <- filter(brn0,year(date)>=2004)
+  brn0 <- filter(brn0,year(date)>=2015)
 
   setkey(gen0,date,country,product_type)
   setkey(brn0,date,country,product_type)
