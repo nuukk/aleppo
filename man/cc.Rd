@@ -2,8 +2,9 @@
 \alias{cc}
 \title{Copy & Paste}
 \usage{
-  cc(data-set,type="Y)
-  cc(...,"Y)
+  cc(data-set,type='Y')
+  cc(data-set,'Y')
+  cc(data-set)
 }
 \description{
   데이터셋 등을 클립보드에 복사해주는 함수입니다.
