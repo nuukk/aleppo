@@ -1,4 +1,3 @@
-  
 \name{Copy & Paste}
 \alias{Copy & Paste}
 \title{Copy & Paste}
