@@ -1,5 +1,6 @@
-CV <- function(...)
+CV <- function(...,n=2)
 {
+  n <- as.numeric(n)
   x <- as.numeric(...)
-  return(sd(x)/mean(x))
+  return(round(sd(x)/mean(x),digits=n))
 }
