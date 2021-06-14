@@ -1,5 +1,5 @@
-\name{Copy & Paste}
-\alias{Copy & Paste}
+\name{cc}
+\alias{cc}
 \title{Copy & Paste}
 \usage{
   cc(data-set)
