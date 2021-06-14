@@ -1,0 +1,19 @@
+da_report_conversion <- function(name)
+{
+  name <- deparse(substitute(name))
+  file_list <- normalizePath(enc2native(choose.files()))
+  
+  cl <- makeCluster(detectCores()-1)
+  registerDoParallel(cl)
+  raw <- foreach(i=seq_along(file_list), .combine=rbind, .packages=c('data.table')) %dopar%
+    {
+      data.table(Sitecode=fifelse(fread(cmd=paste0('findstr /r .Report.suite ','"',file_list[[i]],'"'),sep="-",header=F)$V2=='MST Global',
+                                  fread(cmd=paste0('findstr /v /b # ','"',file_list[[i]],'"'),header=F,encoding='UTF-8')$V3[[1]],'US'),
+                 fread(cmd=paste0('findstr /v /b # ','"',file_list[[i]],'"'),header=F,encoding='UTF-8'))
+    }
+  stopCluster(cl)
+  raw <- raw[V1=='Natural Search' & str_detect(V2,'[0-9]-[0-9]')]
+  raw <- select(raw,dimension=V1,Date=V2,entries=V3,order=V4,revenue=V5,country=Sitecode)
+  directory <- choose.dir('저장할 폴더를 선택하세요')
+  fwrite(raw,enc2native(paste0(directory,'/',name,'.csv')),row.names=F)
+}
