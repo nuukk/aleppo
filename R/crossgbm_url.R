@@ -23,7 +23,7 @@ crossgbm_url <- function(...,name,year,month)
                        Entry_Share=prop.table(Entry_YoY)*100,
                        Order_Share=prop.table(Order_YoY)*100),gbm_detail,Sitecode,URL,starts_with('Entry'),starts_with('Order'))
   
-  temp2total <- select(mutate(summarize(group_by(temp2,Sitecode),across(where(is.numeric),sum)),\
+  temp2total <- select(mutate(summarize(group_by(temp2,Sitecode),across(where(is.numeric),sum)),
                        gbm_detail='#TOTAL',URL='#TOTAL',
                        Entry_YoY:=get(paste0('Entry_',year2))-get(paste0('Entry_',year1)),
                        Order_YoY:=get(paste0('Order_',year2))-get(paste0('Order_',year1)),
