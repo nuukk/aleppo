@@ -1,5 +1,3 @@
-#작성중
-
 crossgbm_url <- function(...,name,year,month)
 {
   name <- deparse(substitute(name))
