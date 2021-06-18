@@ -13,5 +13,6 @@
 }
 
 \examples{
-  encoding('<U+0E23><U+0E32><U+0E04><U+0E32><U+0E40><U+0E04><U+0E23><U+0E37><U+0E48><U+0E2D><U+0E07><U+0E0B><U+0E31><U+0E01><U+0E1C><U+0E49><U+0E32> samsung')' #결과: "ราคาเครื่องซักผ้า samsung"
+  encoding('<U+0E23><U+0E32><U+0E04><U+0E32><U+0E40><U+0E04><U+0E23><U+0E37><U+0E48><U+0E2D><U+0E07><U+0E0B><U+0E31><U+0E01><U+0E1C><U+0E49><U+0E32> samsung')
+  #결과: "ราคาเครื่องซักผ้า samsung"
 }
