@@ -19,6 +19,12 @@ trends_traffic <- function(name,dbname)
   gen0 <- select(gen0,date,country=geo,kw_G=keyword,G_trends=hits,product_type)
   brn0 <- select(brn0,date,country=geo,kw_B=keyword,B_trends=hits,product_type)
   
+  temp <- bind_rows(brn0[year(date)==1900,.(country,keyword=kw_B,type='BRAND')],gen0[year(date)==1900,.(country,keyword=kw_G,type='General')])
+  if(nrow(temp)>0) {
+    message('자동 수집 되지 않은 키워드는 다음과 같습니다.')
+    print(temp)
+  }
+  
   code <- c('오스트레일리아'='AU','브라질'='BR','독일'='DE','스페인'='ES','프랑스'='FR',
             '인도'='ID','인도네시아'='IN','이탈리아'='IT','네덜란드'='NL','러시아'='RU',
             '태국'='TH','영국'='GB','미국'='US')
@@ -39,8 +45,8 @@ trends_traffic <- function(name,dbname)
     gen0 <- bind_rows(gen0,sec_gen)
   }
   gen0 <- filter(gen0,year(date)>=2015)
-
-    if(askYesNo('추가 Brand Raw 파일을 추가하실래요?')=='TRUE') {
+  
+  if(askYesNo('추가 Brand Raw 파일을 추가하실래요?')=='TRUE') {
     sec_brn_filelist <- normalizePath(enc2native(choose.files(caption='추가 Brand RAW를 선택하세요')))
     cl <- makeCluster(detectCores()-1)
     registerDoParallel(cl)
@@ -57,7 +63,7 @@ trends_traffic <- function(name,dbname)
     brn0 <- bind_rows(brn0,sec_brn)
   }
   brn0 <- filter(brn0,year(date)>=2015)
-
+  
   setkey(gen0,date,country,product_type)
   setkey(brn0,date,country,product_type)
   trends <- full_join(gen0,brn0)
