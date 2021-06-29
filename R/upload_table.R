@@ -1,6 +1,5 @@
-upload_table <- function(...,name,dbname,dbuser,dbpw,dbhost,port,append=c('Y','N'))
+upload_table <- function(x,name,dbname,dbuser,dbpw,dbhost,port,append=c('Y','N'))
 {
-  x <- data.frame(...)
   name <- deparse(substitute(name))
   if(missing(append)) append <- 'Y'
   a <- dbConnect(dbDriver("MySQL"),
