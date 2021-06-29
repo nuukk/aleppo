@@ -10,6 +10,7 @@ upload_table <- function(name,dbname,dbuser,dbpw,dbhost,port,append=c('Y','N'))
                  host=dbhost,
                  port=port)
   dbSendQuery(a, 'set character set "euckr"')
+  if(sum(dbListTables(a)==name)==0) { append <- 'N' }
   if(append=='Y') {
     dbWriteTable(a,name,x,row.names=F,append=T)
   } else {
