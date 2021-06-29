@@ -1,5 +1,6 @@
-upload_table <- function(x,name,dbname,dbuser,dbpw,dbhost,port,append=c('Y','N'))
+upload_table <- function(name,dbname,dbuser,dbpw,dbhost,port,append=c('Y','N'))
 {
+  x <- get(ls(.GlobalEnv)[menu(ls(.GlobalEnv),graphics=TRUE,title="업로드할 자료를 선택하세요")])
   name <- deparse(substitute(name))
   if(missing(append)) append <- 'Y'
   a <- dbConnect(dbDriver("MySQL"),
