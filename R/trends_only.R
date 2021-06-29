@@ -1,4 +1,4 @@
-trends_only <- function(name,fyear)
+trends_only <- function(name,fyear,date)
 {
   name <- deparse(substitute(name))
   if(missing(fyear)) fyear <- 2015
@@ -8,17 +8,25 @@ trends_only <- function(name,fyear)
   keyword_info <- data.table(keyword_info[complete.cases(keyword_info),])
   keyword_info$국가[keyword_info$국가=='UK'] <- 'GB'
   
-  gen0 <- data.table(reduce(map2(keyword_info$General,keyword_info$국가,googletrendscrawling),plyr::rbind.fill))
-  brn0 <- data.table(reduce(map2(keyword_info$Brand,keyword_info$국가,googletrendscrawling),plyr::rbind.fill))
+  if(askYesNo('월단위로 구글트렌드 자료를 수집하실건가요?')==TRUE) {
+    gen0 <- data.table(reduce(map2(keyword_info$General,keyword_info$국가,googletrendscrawling),plyr::rbind.fill))
+    brn0 <- data.table(reduce(map2(keyword_info$Brand,keyword_info$국가,googletrendscrawling),plyr::rbind.fill))
+  } else {
+    gen0 <- data.table(reduce(Map(googletrendscrawling,x=keyword_info$General,y=keyword_info$국가,date),plyr::rbind.fill))
+    brn0 <- data.table(reduce(Map(googletrendscrawling,x=keyword_info$Brand,y=keyword_info$국가,date),plyr::rbind.fill))
+  }
   
   keyword_info$국가[keyword_info$국가=='GB'] <- 'UK'
   gen0$geo[gen0$geo=='GB'] <- 'UK'
   brn0$geo[brn0$geo=='GB'] <- 'UK'
-  
+
   gen0[,product_type:=as.character(map2(gen0$geo,gen0$keyword,function(x,y) {keyword_info$제품군[keyword_info$국가==x & keyword_info$General==y]}))]
   brn0[,product_type:=as.character(map2(brn0$geo,brn0$keyword,function(x,y) {keyword_info$제품군[keyword_info$국가==x & keyword_info$Brand==y]}))]
+  
+  
   gen0 <- select(gen0,date,country=geo,product_type,trends_G=keyword,G_trends=hits,product_type)
   brn0 <- select(brn0,date,country=geo,product_type,kw_B=keyword,B_trends=hits,product_type)
+  
   if(askYesNo('추가 General Raw 파일을 추가하실래요?')=='TRUE') {
     sec_gen_filelist <- normalizePath(enc2native(choose.files(caption='추가 General RAW를 선택하세요')))
     cl <- makeCluster(detectCores()-1)
