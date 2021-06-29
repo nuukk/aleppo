@@ -13,8 +13,8 @@ da_report_conversion <- function(name,start_date,end_date)
     }
   stopCluster(cl)
   raw <- distinct(raw[V1=='Natural Search' & str_detect(V2,'[0-9]-[0-9]'),.(dimension=V1,Date=V2,entries=V3,order=V4,revenue=V5,country=Sitecode)][order(country,Date,-(entries))],country,Date,.keep_all=TRUE)
-  if(missing(start_date)) <- min(raw[['Date']])
-  if(missing(end_date)) <- max(raw[['Date']])
+  if(missing(start_date)) start_date <- min(raw$Date)
+  if(missing(end_date)) end_date <- max(raw$Date)
   start_date <- as.Date(start_date)
   end_date <- as.Date(end_date)
   raw <- raw[between(Date,start_date,end_date)]
