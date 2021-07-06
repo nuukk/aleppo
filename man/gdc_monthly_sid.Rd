@@ -3,7 +3,7 @@
 \title{gdc_monthly_sid}
 \usage{
   gdc_monthly_sid(name=myfile,start_date='2021-01-01',end_date='2021-02-28')
-    gdc_monthly_sid(name=myfile,start_date='2021-02-28',end_date='2021-01-01')
+  gdc_monthly_sid(name=myfile,start_date='2021-02-28',end_date='2021-01-01')
   gdc_monthly_sid(name=myfile)
   gdc_monthly_sid(myfile,'2021-01-01','2021-02-28')
   gdc_monthly_sid(myfile,start_date='2021-01-01')
