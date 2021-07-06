@@ -1,14 +1,3 @@
-x <- choose.files()
-b <- read_excel(x)
-
-
-excel_sheets(enc2native(x))[menu(excel_sheets(enc2native(x)),graphics=TRUE)]
-
-
-read_excel(enc2native(x),
-           sheet=excel_sheets(enc2native(x))[menu(excel_sheets(enc2native(x)),graphics=TRUE)])
-
-###############
 gdc_monthly_gsc <- function(name,start_date,end_date)
 {
   name <- deparse(substitute(name))
