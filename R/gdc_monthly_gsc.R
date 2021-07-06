@@ -25,5 +25,6 @@ gdc_monthly_gsc <- function(name,start_date,end_date)
   setkey(table,Url)
   setkey(raw,Page)
   raw <- select(filter_all(table[raw],all_vars(!is.na(.))),Model,Country,Page=Url,Date,Clicks,Impressions,Ctr,Position,Url=i.Url)
-  write.csv(raw,paste0(choose.dir(caption='저장할 경로를 지정하세요'),"/",name,'.csv'),row.names=F)
+  dir <- choose.dir(caption='파일을 저장할 경로를 지정하세요')
+  write.csv(raw,paste0(dir,"/",name,'.csv'),row.names=F)
 }
