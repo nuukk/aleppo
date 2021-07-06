@@ -1,6 +1,6 @@
 Package: aleppo
-Title: What the Package Does (One Line, Title Case)
-Version: 0.6.0629
+Title: Aleppo
+Version: 0.61.0706
 Authors@R: 
     person(given = "First",
            family = "Last",
@@ -21,7 +21,8 @@ Imports:
     DBI,
     RMySQL,
     purrr,
-    gtrendsR
+    gtrendsR,
+    parallel
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
