@@ -33,7 +33,7 @@ gdc_monthly_gsc <- function(name,start_date,end_date)
   raw <- raw[between(Date,start_date,end_date)]
   table_list <- enc2native(choose.files(caption='기준 파일을 선택하세요'))
   table <- suppressMessages(data.table(read_excel(table_list,
-             sheet=excel_sheets(table_list)[menu(title='Sheet를 선택하세오',excel_sheets(table_list),graphics=TRUE)])))
+             sheet=excel_sheets(table_list)[menu(title='Sheet를 선택하세요',excel_sheets(table_list),graphics=TRUE)])))
   table <- table[-seq_len(which(table[,1]=='Country')),.(Country=`GDC URL List`,Model=`...4`,Url=`...5`)]
   setkey(table,Url)
   setkey(raw,Page)
