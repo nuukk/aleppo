@@ -1,3 +1,14 @@
+x <- choose.files()
+b <- read_excel(x)
+
+
+excel_sheets(enc2native(x))[menu(excel_sheets(enc2native(x)),graphics=TRUE)]
+
+
+read_excel(enc2native(x),
+           sheet=excel_sheets(enc2native(x))[menu(excel_sheets(enc2native(x)),graphics=TRUE)])
+
+###############
 gdc_monthly_gsc <- function(name,start_date,end_date)
 {
   name <- deparse(substitute(name))
@@ -20,7 +31,9 @@ gdc_monthly_gsc <- function(name,start_date,end_date)
     start_date <- temp_date
   }
   raw <- raw[between(Date,start_date,end_date)]
-  table <- suppressMessages(data.table(read_excel(enc2native(choose.files('기준 파일을 선택하세요')),sheet='URL List')))
+  table_list <- enc2native(choose.files(caption='기준 파일을 선택하세요'))
+  table <- suppressMessages(data.table(read_excel(table_list,
+             sheet=excel_sheets(table_list)[menu(title='Sheet를 선택하세오',excel_sheets(table_list),graphics=TRUE)])))
   table <- table[-seq_len(which(table[,1]=='Country')),.(Country=`GDC URL List`,Model=`...4`,Url=`...5`)]
   setkey(table,Url)
   setkey(raw,Page)
