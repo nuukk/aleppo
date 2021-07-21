@@ -1,7 +1,8 @@
 save_csv <- function(...,filename)
 {
-  if(!missing(filename)) filename <- deparse(substitute(filename))
+  #if(!missing(filename)) filename <- deparse(substitute(filename))
   if(missing(filename)) filename <- gsub(' |:','-',paste0(Sys.time()))
+  filename <- deparse(substitute(filename))
   data <- data.table(...)
   cn <- which(map_lgl(names(data),function(x) {is.character(data[,get(x)])}))
   dn <- which(map_lgl(names(data),function(x) {is.Date(data[,get(x)])}))
