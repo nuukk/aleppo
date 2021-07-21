@@ -18,6 +18,6 @@ da_report_conversion <- function(name,start_date,end_date)
   start_date <- as.Date(start_date)
   end_date <- as.Date(end_date)
   raw <- raw[between(Date,start_date,end_date)]
-  directory <- choose.dir('저장할 폴더를 선택하세요')
-  fwrite(raw,enc2native(paste0(directory,'/',name,'.csv')),row.names=F)
+  save_csv(raw,filename=name)
+  assign(name,raw,.GlobalEnv)
 }
