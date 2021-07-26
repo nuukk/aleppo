@@ -66,6 +66,6 @@ trends_only <- function(name,fyear,date)
   trends <- full_join(gen0,brn0)
   suppressWarnings(trends[,`:=`(date=as.Date(date),country=toupper(country),product_type=toupper(product_type),trends_G=as.numeric(G_trends),trends_B=as.numeric(B_trends))])
   trends <- select(trends,date,country,product_type,trends_G,trends_B)
-  write_xlsx(trends,paste0(enc2native(choose.dir("저장할 위치를 선택하세요")),'/',name,'.xlsx'))
+  save_csv(trends,filename=name)
   assign(name,trends,.GlobalEnv)
 }
