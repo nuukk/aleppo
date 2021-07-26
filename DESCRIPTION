@@ -1,6 +1,6 @@
 Package: aleppo
 Title: Aleppo
-Version: 0.61.0706
+Version: 0.65.0726
 Authors@R: 
     person(given = "First",
            family = "Last",
