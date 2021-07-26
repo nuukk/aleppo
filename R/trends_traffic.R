@@ -77,6 +77,5 @@ trends_traffic <- function(name,dbname)
   raw <- traffic[,c('country','month','product',traffic='natural traffic')][trends][,.(country,product_type=product,month,traffic=`natural traffic`,kw_G,G_trends,kw_B,B_trends)]
   raw <- arrange(filter(raw,year(month)>=2019),country,product_type,kw_G,kw_B,month)
   save_csv(raw,filename=name)
-  writexl::write_xlsx(raw,paste0(directory,"/",name,".xlsx"))
   assign(name,raw,.GlobalEnv)
 }
